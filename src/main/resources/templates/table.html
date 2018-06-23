@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+<title>Task Page</title>
+</head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+th{
+	border: 1px solid #000000;
+	text-align: center;
+	font-size: 23px
+}
+td {
+    border: 1px solid #000000;
+    text-align: center;
+    padding: 8px;
+}
+h1{
+	font-family: arial;
+	text-align: center;
+}
+</style>
+<body>
+<table>
+<tr th:each="Task : ${taskList}">
+  <td th:text="${Task.id}">1</td>
+  <td><a href="#" th:text="${Task.Username}"></a></td>
+  <td th:text="${Task.Description}"></td>
+</tr>
+</table>
+</body>
