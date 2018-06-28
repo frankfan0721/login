@@ -17,6 +17,9 @@ public class GreetingController {
     TasksRepository tasksRepository;
 
 
+
+
+
     @GetMapping("/login")
     public String greeting(@RequestParam(name="Username", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("Username", name);
@@ -30,17 +33,23 @@ public class GreetingController {
     }
 
     @PostMapping("/verify")
-    public String verify(@RequestParam(name="Username", required=false, defaultValue="World") String name,@RequestParam(name="Password", required=false, defaultValue="World") String password, Model model) {
+    public String verify(@RequestParam(name="Username", required=true) String username,
+                         @RequestParam(name="Password", required=true) String password,
+                         Model model) {
 
-        if(customerRepository.findByUsername(name).isPresent()){
-            Customer customer = customerRepository.findByUsername(name).get();
-            customer.getUsername().equals(name);
+        if(customerRepository.findByUsername(username).isPresent()){
+            Customer customer = customerRepository.findByUsername(username).get();
+            customer.getUsername().equals(username);
 
             if (customer.getPassword().equals(password)) {
-                model.addAttribute("Username", name);
-                model.addAttribute("Password", password);
-                List<Task> taskList = tasksRepository.findAll();
-                System.out.print(taskList.toString());
+
+//                model.addAttribute("Username", name);
+//                model.addAttribute("Password", password);
+//                model.addAttribute("UserID", customer.getId());
+
+                List<Task> taskList = tasksRepository.findByUserID(customer.getId());
+//                List<Task> taskList = tasksRepository.findAll();
+//                System.out.print(taskList.toString());
 
                 model.addAttribute("taskList", taskList);
 
@@ -59,21 +68,6 @@ public class GreetingController {
 
     }
 
-
-    @PostMapping("/table")
-    public String table(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-
-        Customer customer = customerRepository.findAll().get(0);
-        System.out.print(customer.toString());
-        List<Task> taskList = tasksRepository.findAll();
-        System.out.print(taskList.toString());
-
-        model.addAttribute("taskList", taskList);
-
-
-        return "table";
-    }
 
 
 

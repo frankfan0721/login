@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
 import java.util.Optional;
 
 @RunWith(SpringRunner.class)
@@ -19,21 +20,28 @@ public class DemoApplicationTests {
 	TasksRepository tasksRepository;
 	@Test
 	public void contextLoads() {
-		Customer customer = customerRepository.findAll().get(0);
-		System.out.print(customer.toString());
-		Task task= tasksRepository.findAll().get(0);
-		System.out.print(task.toString());
+//		Customer customer = customerRepository.findAll().get(0);
+//		System.out.print(customer.toString());
+//		Task task= tasksRepository.findAll();
+//		System.out.print(task.toString());
 	}
 	@Test
 	public void customertest(){
-		Optional<Customer> customerOptional = customerRepository.findByLastName("Paul");
+//		Optional<Customer> customerOptional = customerRepository.findByLastName("Paul");
 
-		if(customerOptional.isPresent()){
-			System.out.print("found customer" + customerOptional.get().toString());
-		}
-		else {
-				System.out.print("not found ");
-		}
+//		if(customerOptional.isPresent()){
+//			System.out.print("found customer" + customerOptional.get().toString());
+//		}
+//		else {
+//				System.out.print("not found ");
+//		}
+	}
+
+	@Test
+	public void customerrepotest(){
+		Optional<Task> taskList = tasksRepository.findById(1L);
+//		List<Task> taskList = tasksRepository.findAll();
+
 	}
 
 

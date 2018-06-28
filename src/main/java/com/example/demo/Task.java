@@ -35,7 +35,16 @@ public class Task{
         this.Description = Description;
     }
 
+    public Long getUserID() {
+        return userID;
+    }
 
+    public void setUserID(Long userID) {
+        this.userID = userID;
+    }
+
+    @Column(name = "userID")
+    private Long userID;
 
     @Column(name = "Username")
     private String Username;
@@ -46,11 +55,5 @@ public class Task{
 
 
 
-    @Override
-    public String toString() {
-        return String.format(
-                "Task[id=%d, Username='%s', Description='%s']",
-                id, Username, Description);
-    }
 
 }
